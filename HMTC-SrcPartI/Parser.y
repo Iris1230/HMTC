@@ -1,20 +1,20 @@
 -- ***************************************************************************
--- *				   H M T C				     *
--- *									     *
--- *	Module:		Parser						     *
--- *	Purpose:	MiniTriangle parser				     *
--- *	Authors:	Henrik Nilsson					     *
--- *									     *
+-- *                   H M T C                   *
+-- *                                         *
+-- *    Module:     Parser                           *
+-- *    Purpose:    MiniTriangle parser                  *
+-- *    Authors:    Henrik Nilsson                       *
+-- *                                         *
 -- *               Copyright (c) Henrik Nilsson, 2006 - 2012                 *
--- *									     *
+-- *                                         *
 -- ***************************************************************************
 
 {
 -- | MiniTriangle parser
 
 module Parser (
-    parse,		-- :: String -> D AST
-    testParser		-- :: String -> IO ()
+    parse,      -- :: String -> D AST
+    testParser      -- :: String -> IO ()
 ) where
 
 -- HMTC module imports
@@ -51,9 +51,10 @@ import Scanner
 -- carry additional information (like identifiers) is the token and
 -- source code position pair itself.
 %token
-    '('		{ (LPar, $$) }
-    ')'		{ (RPar, $$) }
+    '('     { (LPar, $$) }
+    ')'     { (RPar, $$) }
     ','         { (Comma, $$) }
+<<<<<<< HEAD
     ';'		{ (Semicol, $$) }
     ':'		{ (Colon, $$) }
     ':='	{ (ColEq, $$) }
@@ -90,6 +91,44 @@ import Scanner
     '&&'	{ (Op {opName="&&"},  _) }
     '||'	{ (Op {opName="||"},  _) }
     '!'		{ (Op {opName="!"},   _) }
+=======
+    ';'     { (Semicol, $$) }
+    ':'     { (Colon, $$) }
+    ':='    { (ColEq, $$) }
+    '='     { (Equals, $$) }
+    '?'     { (Condition, $$) }
+    BEGIN   { (Begin, $$) }
+    CONST   { (Const, $$) }
+    DO      { (Do, $$) }
+    ELSE    { (Else, $$) }
+    ELSIF   { (Elsif, $$) }
+    END     { (End, $$) }
+    IF      { (If, $$) }
+    IN      { (In, $$) }
+    LET     { (Let, $$) }
+    THEN    { (Then, $$) }
+    VAR     { (Var, $$) }
+    WHILE   { (While, $$) }
+    REPEAT  { (Repeat, $$) }
+    UNTIL   { (Until, $$) }
+    LITINT  { (LitInt {}, _) }
+    LITCHR  { (LitChr {}, _) }
+    ID      { (Id {}, _) }
+    '+'     { (Op {opName="+"},   _) }
+    '-'     { (Op {opName="-"},   _) }
+    '*'     { (Op {opName="*"},   _) }
+    '/'     { (Op {opName="/"},   _) }
+    '^'     { (Op {opName="^"},   _) }
+    '<'     { (Op {opName="<"},   _) }
+    '<='    { (Op {opName="<="},  _) }
+    '=='    { (Op {opName="=="},  _) }
+    '!='    { (Op {opName="!="},  _) }
+    '>='    { (Op {opName=">="},  _) }
+    '>'     { (Op {opName=">"},   _) }
+    '&&'    { (Op {opName="&&"},  _) }
+    '||'    { (Op {opName="||"},  _) }
+    '!'     { (Op {opName="!"},   _) }
+>>>>>>> e89c6d79d0f8adcdcb3bd1f7fd66cc5185b39219
 
 %left '||'
 %left '&&'
@@ -102,12 +141,12 @@ import Scanner
 %%
 
 program :: { AST }
-program : command	{ AST $1 }
+program : command   { AST $1 }
 
 
 commands :: { [Command] }
-commands : command		{ [$1] } 
-         | command ';' commands	{ $1 : $3 }
+commands : command      { [$1] } 
+         | command ';' commands { $1 : $3 }
 
 
 command :: { Command }
@@ -126,10 +165,10 @@ command
         { CmdLet {clDecls = $2, clBody = $4, cmdSrcPos = $1} }
     | BEGIN commands END
         { if length $2 == 1 then
-	      head $2
-	  else
-	      CmdSeq {csCmds = $2, cmdSrcPos = srcPos $2}
-	}
+          head $2
+      else
+          CmdSeq {csCmds = $2, cmdSrcPos = srcPos $2}
+    }
 
 optelse :: { Maybe Command }
 optelse : {- epsilon -}
@@ -166,27 +205,27 @@ expression
     : primary_expression
         { $1 }
     | expression opclass_disjunctive expression %prec '||'
-	{ ExpApp {eaFun     = $2,
+    { ExpApp {eaFun     = $2,
                   eaArgs    = [$1,$3],
                   expSrcPos = srcPos $1} }
     | expression opclass_conjunctive expression %prec '&&'
-	{ ExpApp {eaFun     = $2,
+    { ExpApp {eaFun     = $2,
                   eaArgs    = [$1,$3],
                   expSrcPos = srcPos $1} }
     | expression opclass_relational expression %prec '=='
-	{ ExpApp {eaFun     = $2,
+    { ExpApp {eaFun     = $2,
                   eaArgs    = [$1,$3],
                   expSrcPos = srcPos $1} }
     | expression opclass_additive expression %prec '+'
-	{ ExpApp {eaFun     = $2,
+    { ExpApp {eaFun     = $2,
                   eaArgs    = [$1,$3],
                   expSrcPos = srcPos $1} }
     | expression opclass_multiplicative expression %prec '*'
-	{ ExpApp {eaFun     = $2,
+    { ExpApp {eaFun     = $2,
                   eaArgs    = [$1,$3],
                   expSrcPos = srcPos $1} }
     | expression opclass_exponential expression %prec '^'
-	{ ExpApp {eaFun     = $2,
+    { ExpApp {eaFun     = $2,
                   eaArgs    = [$1,$3],
                   expSrcPos = srcPos $1} }
     | expression '?' expression ':' expression
@@ -204,7 +243,7 @@ primary_expression :: { Expression }
     | LITCHR
         { ExpLitChr {elcVal = tspLCVal $1, expSrcPos = tspSrcPos $1} }
     | opclass_unary primary_expression
-	{ ExpApp {eaFun = $1, eaArgs = [$2], expSrcPos = srcPos $1}}
+    { ExpApp {eaFun = $1, eaArgs = [$2], expSrcPos = srcPos $1}}
     | '(' expression ')'
         { $2 }
 
@@ -268,16 +307,16 @@ unary_op
 declarations :: { [Declaration] }
 declarations
     : declaration
-	{ [$1] } 
+    { [$1] } 
     | declaration ';' declarations
-	{ $1 : $3 }
+    { $1 : $3 }
 
 
 declaration :: { Declaration }
 declaration
     : CONST ID ':' type_denoter '=' expression
-	{ DeclConst {dcConst = tspIdName $2, dcType = $4, dcVal = $6,
-		     declSrcPos = $1} }
+    { DeclConst {dcConst = tspIdName $2, dcType = $4, dcVal = $6,
+             declSrcPos = $1} }
     | VAR ID ':' type_denoter
         { DeclVar {dvVar = tspIdName $2, dvType = $4, dvMbVal = Nothing,
           declSrcPos = $1} }
@@ -287,7 +326,7 @@ declaration
 
 
 type_denoter :: { TypeDenoter }
-type_denoter : ID	{ TDBaseType {tdbtName = tspIdName $1,
+type_denoter : ID   { TDBaseType {tdbtName = tspIdName $1,
                                       tdSrcPos = tspSrcPos $1} }
 
 

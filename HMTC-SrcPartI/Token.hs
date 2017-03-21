@@ -1,13 +1,13 @@
 {-
 ******************************************************************************
-*				   H M T C				     *
-*									     *
-*	Module:		Token						     *
-*	Purpose:	Representation of tokens (lexical symbols)	     *
-*	Authors:	Henrik Nilsson					     *
-*									     *
+*                  H M T C                   *
+*                                        *
+*   Module:     Token                            *
+*   Purpose:    Representation of tokens (lexical symbols)       *
+*   Authors:    Henrik Nilsson                       *
+*                                        *
 *                 Copyright (c) Henrik Nilsson, 2006 - 2012                  *
-*									     *
+*                                        *
 ******************************************************************************
 -}
 
@@ -23,37 +23,37 @@ import Name
 
 data Token
     -- Graphical tokens
-    = LPar	-- ^ \"(\"
+    = LPar  -- ^ \"(\"
     | RPar      -- ^ \")\"
     | Comma     -- ^ \",\"
     | Semicol   -- ^ \";\"
-    | Colon	-- ^ \":\"
+    | Colon -- ^ \":\"
     | ColEq     -- ^ \":=\"
     | Equals    -- ^ \"=\"
     | Condition -- ^ \"?\"
 
     -- Keywords
-    | Begin	-- ^ \"begin\"
-    | Const	-- ^ \"const\"
-    | Do	-- ^ \"do\"
-    | Else	-- ^ \"else\"
+    | Begin -- ^ \"begin\"
+    | Const -- ^ \"const\"
+    | Do    -- ^ \"do\"
+    | Else  -- ^ \"else\"
     | Elsif -- ^ \"elsif\"
     | End   -- ^ \"end\"
-    | If	-- ^ \"if\"
-    | In	-- ^ \"in\"
-    | Let	-- ^ \"let\"
-    | Then	-- ^ \"then\"
-    | Var	-- ^ \"var\"
-    | While	-- ^ \"while\"
+    | If    -- ^ \"if\"
+    | In    -- ^ \"in\"
+    | Let   -- ^ \"let\"
+    | Then  -- ^ \"then\"
+    | Var   -- ^ \"var\"
+    | While -- ^ \"while\"
     | Repeat -- ^ \"repeat\"
     | Until -- ^ \"until\"
 
     -- Tokens with variable spellings
-    | LitInt {liVal :: Integer}		-- ^ Integer literals
+    | LitInt {liVal :: Integer}     -- ^ Integer literals
     | LitChr {lcVal :: Char}        -- ^ Character literals
-    | Id     {idName :: Name}		-- ^ Identifiers
-    | Op     {opName :: Name}		-- ^ Operators
+    | Id     {idName :: Name}       -- ^ Identifiers
+    | Op     {opName :: Name}       -- ^ Operators
 
     -- End Of File marker
-    | EOF				-- ^ End of file (input) marker.
+    | EOF               -- ^ End of file (input) marker.
     deriving (Eq, Show)
