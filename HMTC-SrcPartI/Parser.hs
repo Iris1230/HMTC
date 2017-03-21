@@ -4,8 +4,8 @@
 -- | MiniTriangle parser
 
 module Parser (
-    parse,		-- :: String -> D AST
-    testParser		-- :: String -> IO ()
+    parse,      -- :: String -> D AST
+    testParser      -- :: String -> IO ()
 ) where
 
 -- HMTC module imports
@@ -359,9 +359,9 @@ happyReduction_10 happy_x_3
 	 =  case happyOut5 happy_x_2 of { happy_var_2 -> 
 	happyIn6
 		 (if length happy_var_2 == 1 then
-	      head happy_var_2
-	  else
-	      CmdSeq {csCmds = happy_var_2, cmdSrcPos = srcPos happy_var_2}
+          head happy_var_2
+      else
+          CmdSeq {csCmds = happy_var_2, cmdSrcPos = srcPos happy_var_2}
 	)}
 
 happyReduce_11 = happySpecReduce_0  3# happyReduction_11
@@ -725,7 +725,7 @@ happyReduction_52 (happy_x_6 `HappyStk`
 	case happyOut10 happy_x_6 of { happy_var_6 -> 
 	happyIn25
 		 (DeclConst {dcConst = tspIdName happy_var_2, dcType = happy_var_4, dcVal = happy_var_6,
-		     declSrcPos = happy_var_1}
+             declSrcPos = happy_var_1}
 	) `HappyStk` happyRest}}}}
 
 happyReduce_53 = happyReduce 4# 21# happyReduction_53

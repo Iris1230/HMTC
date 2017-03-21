@@ -1,11 +1,8 @@
-// This is a comment.  It continues to the end of the line.
-let
-    var m: Integer;
-    var a: Integer;
-    const n: Integer = 9
-in
-    begin
-        m := 1 + 2 * (n + 1);
-        a := ((3 > 2) ? 3 : 2) + 1;
-        putint(m)
-    end
+if x < 10 then
+    y := 1
+elsif x == 10 then
+    y := 2
+elsif x > 10 then
+    y := 3
+else
+    y := 0

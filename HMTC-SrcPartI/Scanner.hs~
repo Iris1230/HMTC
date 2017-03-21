@@ -1,13 +1,13 @@
 {-
 ******************************************************************************
-*				   H M T C				     *
-*									     *
-*	Module:		Scanner						     *
-*	Purpose:	MiniTriangle lexical analyser			     *
-*	Authors:	Henrik Nilsson					     *
-*									     *
+*                  H M T C                   *
+*                                        *
+*   Module:     Scanner                          *
+*   Purpose:    MiniTriangle lexical analyser                *
+*   Authors:    Henrik Nilsson                       *
+*                                        *
 *                 Copyright (c) Henrik Nilsson, 2006 - 2014                  *
-*									     *
+*                                        *
 ******************************************************************************
 -}
 
@@ -24,9 +24,9 @@
 -- from the parser. At present only used for diagnostics.
 
 module Scanner (
-    scanner,		-- ((Token, SrcPos) -> P a) -> P a
-    scan,		-- String -> D [(Token, SrcPos)]
-    testScanner		-- String -> IO ()
+    scanner,        -- ((Token, SrcPos) -> P a) -> P a
+    scan,       -- String -> D [(Token, SrcPos)]
+    testScanner     -- String -> IO ()
 ) where
 
 -- Standard library imports
@@ -67,7 +67,6 @@ isOpChr '\\' = True
 isOpChr '^'  = True
 isOpChr '|'  = True
 isOpChr '~'  = True
-isOpChr '?'  = True
 isOpChr _    = False
 
 
@@ -105,9 +104,9 @@ scanner cont = P $ scan
         -- Scan numeric literals, operators, identifiers, and keywords
         scan l c (x : s) | isDigit x = scanLitInt l c x s
                          | isAlpha x = scanIdOrKwd l c x s
-			             | isOpChr x = scanOperator l c x s
+                         | isOpChr x = scanOperator l c x s
                          | otherwise = do
-				           emitErrD (SrcPos l c)
+                                           emitErrD (SrcPos l c)
                                                     ("Lexical error: Illegal \
                                                      \character "
                                                      ++ show x
@@ -186,7 +185,7 @@ scanner cont = P $ scan
         mkIdOrKwd "var"   = Var
         mkIdOrKwd "while" = While
         mkIdOrKwd "repeat" = Repeat
-        mkIdOrKwd "until" = Unitl
+        mkIdOrKwd "until" = Until
         mkIdOrKwd name    = Id {idName = name}
 
         -- Return token, position of token, updated position, and remaning

@@ -54,44 +54,6 @@ import Scanner
     '('     { (LPar, $$) }
     ')'     { (RPar, $$) }
     ','         { (Comma, $$) }
-<<<<<<< HEAD
-    ';'		{ (Semicol, $$) }
-    ':'		{ (Colon, $$) }
-    ':='	{ (ColEq, $$) }
-    '='		{ (Equals, $$) }
-    '?'         { (Condition, $$) }
-    BEGIN	{ (Begin, $$) }
-    CONST	{ (Const, $$) }
-    DO		{ (Do, $$) }
-    ELSE	{ (Else, $$) }
-    ELSIF       { (Elsif, $$) }
-    END		{ (End, $$) }
-    IF		{ (If, $$) }
-    IN		{ (In, $$) }
-    LET		{ (Let, $$) }
-    THEN	{ (Then, $$) }
-    VAR		{ (Var, $$) }
-    WHILE	{ (While, $$) }
-    REPEAT      { (Repeat, $$) }
-    UNTIL       { (Until, $$) }
-    LITINT	{ (LitInt {}, _) }
-    LITCHR      { (LitChr {}, _) }
-    ID          { (Id {}, _) }
-    '+'		{ (Op {opName="+"},   _) }
-    '-'		{ (Op {opName="-"},   _) }
-    '*'		{ (Op {opName="*"},   _) }
-    '/'		{ (Op {opName="/"},   _) }
-    '^'		{ (Op {opName="^"},   _) }
-    '<'		{ (Op {opName="<"},   _) }
-    '<='	{ (Op {opName="<="},  _) }
-    '=='	{ (Op {opName="=="},  _) }
-    '!='	{ (Op {opName="!="},  _) }
-    '>='	{ (Op {opName=">="},  _) }
-    '>'		{ (Op {opName=">"},   _) }
-    '&&'	{ (Op {opName="&&"},  _) }
-    '||'	{ (Op {opName="||"},  _) }
-    '!'		{ (Op {opName="!"},   _) }
-=======
     ';'     { (Semicol, $$) }
     ':'     { (Colon, $$) }
     ':='    { (ColEq, $$) }
@@ -128,7 +90,6 @@ import Scanner
     '&&'    { (Op {opName="&&"},  _) }
     '||'    { (Op {opName="||"},  _) }
     '!'     { (Op {opName="!"},   _) }
->>>>>>> e89c6d79d0f8adcdcb3bd1f7fd66cc5185b39219
 
 %left '||'
 %left '&&'
