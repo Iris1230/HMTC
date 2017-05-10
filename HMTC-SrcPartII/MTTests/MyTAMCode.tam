@@ -1,0 +1,29 @@
+        LOADLB      0 2                 
+        LOADA       [SB + 0]            
+        CALL        getint              
+        LOADL       0                   
+        STORE       [SB + 1]            
+        LOAD        [SB + 0]            
+        LOADL       1                   
+        GTR                             
+        JUMPIFZ     #1                  
+        JUMP        #3                  
+#2:
+        LOAD        [SB + 1]            
+        LOADL       1                   
+        ADD                             
+        CALL        putint              
+        LOAD        [SB + 1]            
+        LOADL       1                   
+        ADD                             
+        STORE       [SB + 1]            
+#3:
+        LOAD        [SB + 1]            
+        LOAD        [SB + 0]            
+        LSS                             
+        JUMPIFNZ    #2                  
+        JUMP        #0                  
+#1:
+#0:
+        POP         0 2                 
+        HALT                            

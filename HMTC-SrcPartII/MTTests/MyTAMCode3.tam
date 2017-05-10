@@ -1,0 +1,18 @@
+		GETINT
+		LOADL		1
+		ADD
+		LOADL		1
+		JUMP		condition
+
+loop:
+		LOAD 		[SB + 1]
+		PUTINT
+		LOADL		1
+		ADD
+
+condition:
+		LOAD 		[SB + 0]
+		LOAD 		[SB + 1]
+		GTR
+		JUMPIFNZ 	loop
+		HALT
