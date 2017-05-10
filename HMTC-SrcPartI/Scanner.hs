@@ -67,7 +67,6 @@ isOpChr '\\' = True
 isOpChr '^'  = True
 isOpChr '|'  = True
 isOpChr '~'  = True
-isOpChr '?'  = True
 isOpChr _    = False
 
 
@@ -91,7 +90,7 @@ scanner cont = P $ scan
         -- Skip white space and comments, including handling various
         -- line ending conventions (NL, CR+NL, NL+CR) gracefully.
         scan l c ('\n' : s) = scan (l + 1) 1 s
-        scan l c ('\r' : s) = scan l 1 s
+	    scan l c ('\r' : s) = scan l 1 s
         scan l c ('\t' : s) = scan l (nextTabStop c) s
         scan l c (' ' : s)  = scan l (c + 1) s
         scan l c ('/' : '/' : s) = scan l c (dropWhile (/='\n') s)
@@ -107,7 +106,7 @@ scanner cont = P $ scan
                          | isAlpha x = scanIdOrKwd l c x s
                          | isOpChr x = scanOperator l c x s
                          | otherwise = do
-                           emitErrD (SrcPos l c)
+                                           emitErrD (SrcPos l c)
                                                     ("Lexical error: Illegal \
                                                      \character "
                                                      ++ show x

@@ -125,13 +125,8 @@ instance HasSrcPos Command where
 data Expression
     -- | Literal integer
     = ExpLitInt {
-<<<<<<< HEAD
 	  eliVal    :: Integer,		-- ^ Integer value
 	  expSrcPos :: SrcPos
-=======
-          eliVal    :: Integer,   -- ^ Integer value
-          expSrcPos :: SrcPos
->>>>>>> e89c6d79d0f8adcdcb3bd1f7fd66cc5185b39219
       }
     -- | Literal character
     | ExpLitChr {
@@ -140,7 +135,6 @@ data Expression
       }
     -- | Variable reference
     | ExpVar {
-<<<<<<< HEAD
 	  evVar     :: Name,		-- ^ Name of referenced variable
 	  expSrcPos :: SrcPos
       }
@@ -149,16 +143,6 @@ data Expression
 	  eaFun     :: Expression,	-- ^ Applied function or operator
           eaArgs    :: [Expression],	-- ^ Arguments
 	  expSrcPos :: SrcPos
-=======
-          evVar     :: Name,    -- ^ Name of referenced variable
-          expSrcPos :: SrcPos
-      }
-    -- | Function or n-ary operator application
-    | ExpApp {
-          eaFun     :: Expression,  -- ^ Applied function or operator
-          eaArgs    :: [Expression],  -- ^ Arguments
-          expSrcPos :: SrcPos
->>>>>>> e89c6d79d0f8adcdcb3bd1f7fd66cc5185b39219
       }
     | ExpCond {
           ecCond    :: Expression,      -- ^ Condition

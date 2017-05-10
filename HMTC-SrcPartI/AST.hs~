@@ -1,13 +1,13 @@
 {-
 ******************************************************************************
-*				   H M T C				     *
-*									     *
-*	Module:		AST						     *
-*	Purpose:	MiniTriangle Abstract Syntax Tree		     *
-*	Authors:	Henrik Nilsson					     *
-*									     *
+*          H M T C             *
+*                      *
+* Module:   AST                *
+* Purpose:  MiniTriangle Abstract Syntax Tree        *
+* Authors:  Henrik Nilsson               *
+*                      *
 *                 Copyright (c) Henrik Nilsson, 2006 - 2012                  *
-*									     *
+*                      *
 ******************************************************************************
 -}
 
@@ -15,11 +15,11 @@
 -- after parsing but prior to type-checking.
 
 module AST (
-    AST (..),		-- Not abstract. Instances: HasSrcPos.
-    Command (..),	-- Not abstract. Instances: HasSrcPos.
-    Expression (..),	-- Not abstract. Instances: HasSrcPos.
-    Declaration (..),	-- Not abstract. Instances: HasSrcPos.
-    TypeDenoter (..)	-- Not abstract. Instances: HasSrcPos.
+    AST (..),   -- Not abstract. Instances: HasSrcPos.
+    Command (..), -- Not abstract. Instances: HasSrcPos.
+    Expression (..),  -- Not abstract. Instances: HasSrcPos.
+    Declaration (..), -- Not abstract. Instances: HasSrcPos.
+    TypeDenoter (..)  -- Not abstract. Instances: HasSrcPos.
 ) where
 
 -- HMTC module imports
@@ -75,19 +75,19 @@ instance HasSrcPos AST where
 data Command
     -- | Assignment
     = CmdAssign {
-          caVar     :: Expression,	-- ^ Assigned variable
-          caVal     :: Expression,	-- ^ Right-hand-side expression
+          caVar     :: Expression,  -- ^ Assigned variable
+          caVal     :: Expression,  -- ^ Right-hand-side expression
           cmdSrcPos :: SrcPos
       }
     -- | Procedure call
     | CmdCall {
-          ccProc    :: Expression,	-- ^ Called procedure
-          ccArgs    :: [Expression],	-- ^ Arguments
+          ccProc    :: Expression,  -- ^ Called procedure
+          ccArgs    :: [Expression],  -- ^ Arguments
           cmdSrcPos :: SrcPos
       }
     -- | Command sequence (block)
     | CmdSeq {
-          csCmds    :: [Command],	-- ^ Commands
+          csCmds    :: [Command], -- ^ Commands
           cmdSrcPos :: SrcPos
       }
     -- | Conditional command
@@ -99,15 +99,15 @@ data Command
       }
     -- | While-loop
     | CmdWhile {
-          cwCond    :: Expression,	-- ^ Loop-condition
-          cwBody    :: Command,		-- ^ Loop-body
-	        cmdSrcPos :: SrcPos
+          cwCond    :: Expression,  -- ^ Loop-condition
+          cwBody    :: Command,   -- ^ Loop-body
+          cmdSrcPos :: SrcPos
       }
     -- | Let-command
     | CmdLet {
-          clDecls   :: [Declaration],	-- ^ Declarations
-          clBody    :: Command,		-- ^ Let-body
-	        cmdSrcPos :: SrcPos
+          clDecls   :: [Declaration], -- ^ Declarations
+          clBody    :: Command,   -- ^ Let-body
+          cmdSrcPos :: SrcPos
       }
     -- | Repeat-loop
     | CmdRepeat {
@@ -125,8 +125,13 @@ instance HasSrcPos Command where
 data Expression
     -- | Literal integer
     = ExpLitInt {
+<<<<<<< HEAD
 	  eliVal    :: Integer,		-- ^ Integer value
 	  expSrcPos :: SrcPos
+=======
+          eliVal    :: Integer,   -- ^ Integer value
+          expSrcPos :: SrcPos
+>>>>>>> e89c6d79d0f8adcdcb3bd1f7fd66cc5185b39219
       }
     -- | Literal character
     | ExpLitChr {
@@ -135,6 +140,7 @@ data Expression
       }
     -- | Variable reference
     | ExpVar {
+<<<<<<< HEAD
 	  evVar     :: Name,		-- ^ Name of referenced variable
 	  expSrcPos :: SrcPos
       }
@@ -143,9 +149,22 @@ data Expression
 	  eaFun     :: Expression,	-- ^ Applied function or operator
           eaArgs    :: [Expression],	-- ^ Arguments
 	  expSrcPos :: SrcPos
+=======
+          evVar     :: Name,    -- ^ Name of referenced variable
+          expSrcPos :: SrcPos
+      }
+    -- | Function or n-ary operator application
+    | ExpApp {
+          eaFun     :: Expression,  -- ^ Applied function or operator
+          eaArgs    :: [Expression],  -- ^ Arguments
+          expSrcPos :: SrcPos
+>>>>>>> e89c6d79d0f8adcdcb3bd1f7fd66cc5185b39219
       }
     | ExpCond {
-
+          ecCond    :: Expression,      -- ^ Condition
+          ecTrue    :: Expression,      -- ^ Value if condition true
+          ecFalse   :: Expression,      -- ^ Value if condition false
+          expSrcPos :: SrcPos
 }
 
 
@@ -157,16 +176,16 @@ instance HasSrcPos Expression where
 data Declaration
     -- | Constant declaration
     = DeclConst {
-	        dcConst    :: Name,		-- ^ Name of defined constant
-	        dcType     :: TypeDenoter,	-- ^ Type of defined constant
-	        dcVal	     :: Expression,	-- ^ Value of defined constant
+          dcConst    :: Name,   -- ^ Name of defined constant
+          dcType     :: TypeDenoter,  -- ^ Type of defined constant
+          dcVal      :: Expression, -- ^ Value of defined constant
           declSrcPos :: SrcPos
       }
     -- | Variable declaration
     | DeclVar {
-	        dvVar	     :: Name,		-- ^ Name of declared variable
-	        dvType     :: TypeDenoter,	-- ^ Type of declared variable
-	        dvMbVal    :: Maybe Expression, -- ^ Initial value of declared
+          dvVar      :: Name,   -- ^ Name of declared variable
+          dvType     :: TypeDenoter,  -- ^ Type of declared variable
+          dvMbVal    :: Maybe Expression, -- ^ Initial value of declared
                                                   -- varible, if any
           declSrcPos :: SrcPos
       }
@@ -184,8 +203,8 @@ instance HasSrcPos Declaration where
 data TypeDenoter
     -- | Base Type
     = TDBaseType {
-          tdbtName :: Name,	-- ^ Name of the base type
-	        tdSrcPos :: SrcPos
+          tdbtName :: Name, -- ^ Name of the base type
+          tdSrcPos :: SrcPos
       }
 
 
